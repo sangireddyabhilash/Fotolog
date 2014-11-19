@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+<form-title>Available plans</form-title>
+    <div>
+        <input id='2g' type='radio' value='2g' name='plans' checked class='plan-radio'/>
+        <span class='plan-name'>2G</span>
+    </div>
+    <div>
+        <input id='3g' type='radio' value='3g' name='plans' class='plan-radio'/>
+        <span class='plan-name'>3G</span>
+    </div>
+    <div>
+        <input id='ftt' type='radio' value='ftt' name='plans' class='plan-radio'/>
+        <span class='plan-name'>Full Talktime</span>
+    </div>
+    <div class='plan-denominations'>
+        <select id='denominations'>
+        </select>
+   </div>
+</form>
+<script src="{{=URL('static', 'scripts/ajax_requests.js')}}"></script>
+<script src="{{=URL('static', 'scripts/event_handlers.js')}}"></script>

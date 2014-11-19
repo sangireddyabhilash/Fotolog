@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Sniglet|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Trade Winds|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Marck Script|Inconsolata|Droid+Sans">
+<style>
+
+#menu{
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+margin-top:0% ;
+padding:0px
+	width: 100%;
+height: 35px;
+	font-size: 16px;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-family: 'Sniglet', serif;
+	font-weight: bold;
+	text-align: center;
+border-radius:15px;
+border:2px solid #a1a1a1;
+}
+#menu ul {
+height: auto;
+padding: 8px 4px;
+margin: 0px;
+}
+#menu li {
+
+display: inline;
+padding: 40px;
+}
+#menu a {
+	text-decoration: none;
+color: black;
+padding: 10px 8px 5px 8px;
+border-radius:15px;
+}
+#menu a:hover {
+       background-color:#6E6E6E;
+color:white
+}
+#container{
+	width: 60%;
+margin: auto;
+padding: 5px;
+border: 1px solid #666;
+background: #E5E4E2;
+}
+#p a{
+
+	font-family: 'Sniglet', serif;
+text-decoration: none;
+color:black ;
+}
+#p a:hover
+{
+padding:10px ;
+background-color:#6E6E6E ;
+border-radius:25px ;
+color:white ;
+}
+</style>
+<style>
+.page{
+padding right:50px ;
+padding left:50px ;
+width 75% ;
+height 100%;
+}
+.page{
+border-top-left-radius:25px;
+border-top-right-radius:25px; 
+-color: #fff;
+background-color: rgba(0,0,0,0.5);
+border:2px solid #a1a1a1;
+width:100% ;
+     /* margin-left:20% ;
+      margin-right:20% ; */
+      margin-bottom:0% ;
+}
+#body{
+background:url('{{=URL('download',args=f[12].image)}}') no-repeat center center fixed; 
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover; ;                     
+	padding 0 ;
+	margin 100% ;
+	width 100% ;
+}
+.pint{
+padding:0.095em ;
+color:black;
+      margin-top:0% ;
+background-color: #fff;
+ background-color: rgba(255,255,255,0.5);
+text-align:center ;
+
+height:50px ;
+border-radius:25px;
+
+border:2px solid #a1a1a1;
+font-family: 'Sniglet', serif;
+font-size:45px ;
+}
+  #form{
+        margin-top:1%;
+        padding:15px ;
+        background-color:rgba(255,255,255,0.5) ;
+        border:2px solid #a1a1a1; 
+        border-radius:25px ;
+      margin-left:5%;
+       margin-right:50% ;
+    }
+    #reg{
+        margin-left:57% ;
+        margin-right:10% ;
+        margin-top:-10% ;
+        padding:20px;
+        text-align:center ;
+        font-family:'Sniglet',serif ;
+        background-color:rgba(255,255,255,0.5) ;
+        border:2px solid #a1a1a1; 
+        border-radius:25px ;
+        
+    }
+    #table{
+        border-radius:25px ;
+          border:2px solid #a1a1a1;  
+        background-color:rgba(255,255,255,0.5) ;
+          margin-left:5% ;
+        margin-right:9% ;
+        margin-top:7% ;
+        padding:10px ;
+    }
+    #follow{
+        margin-right:8% ;
+        margin-left:5% ;
+        margin-top:5% ;
+         color:white ;
+        font-family:'Sniglet',serif ;
+    }
+    #follow a{
+        text-decoration:none;
+    }
+.footer{
+margin-top:10% ;
+	text-align:center ;
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+color:black;
+	   font-size:10px ;
+height:20px ;
+border-radius:25px;
+}
+</style>
+    <style>
+        .carddiv {
+width:200px; height:150px; position:relative; -webkit-transform-style: preserve-3d; -webkit-transform-origin: 100% 75px; -webkit-transition: all 0.7s ease; transform-style: preserve-3d; transform-origin: 100% 75px; transition: all 0.7s ease;
+}
+.container:hover .carddiv {
+-webkit-transform: rotateX(-180deg); transform: rotateX(-180deg);
+}
+.frontofcard, .backofcard {
+width:200px; height:150px; position:absolute; left:0; -webkit-backface-visibility:hidden; backface-visibility:hidden;
+}
+.backofcard {
+padding-top:50px; -webkit-transform: rotateX(180deg); transform: rotateX(180deg);
+}
+        
+    </style>
+
+    
+<title>
+Welcome to fotolog
+</title>
+<head>
+<!--link rel="stylesheet" type="text/css" href="fotolog.css"-->
+</head>
+<div class="page">
+<body id="body">
+</body>
+<div>
+
+    <a style="text-decoration:none;" href="{{=URL(c='default',f='index')}}"><h1 class="pint">fotolog</h1></a>
+</div>
+     <div style="font-family:'Sniglet',serif;margin-left:15%; font-size:20px;padding:5px;margin-right:22%;color:white; ">
+        Login
+    </div>
+    <div id="form">
+    {{=form}}
+</div>    <div id="reg">
+        Didn't Register Yet ??  <br> to register click
+    <a href="{{=URL(f='register')}}">here</a></div>
+  
+<body>
+<div id="table">
+    
+       <h2 style="font-family:'Sniglet',serif;color:white;background-color:rgba(0,0,0,0.5);border-radius:15px; border:2px solid #a1a1a1;margin-left:35%;margin-right:35%;text-align:center;">
+                credits</h2>
+    <div style="margin-left:17%;margin-top:-1%;margin-right:2%;">
+ <div class="container">
+ <div class="carddiv">
+   <img class="frontofcard"  src="{{=URL('download',args=f[18].image)}}"><p class="backofcard" style="font-family:'Sniglet',serif;">
+     Rohith Reddy <br><br>pursuing B-tech and MS by research in Computer Science at IIIT-H<br><br> Smart and Hard Working</p></div></div>	
+    </div> <div style="margin-left:41%;margin-top:-13%;margin-right:2%;"><div class="container">
+ <div class="carddiv">
+   <img class="frontofcard"  src="{{=URL('download',args=f[20].image)}}"><p class="backofcard" style="font-family:'Sniglet',serif; ">Manasa Lingamallu <br><br>pursuing B-tech and MS by research in Building Science at IIIT-H<br><br>Cool and Awesome </p></div></div>	
+ </div>  <div style="margin-left:65%;margin-top:-13%;margin-right:2%;"> <div class="container">
+ <div class="carddiv">
+   <img class="frontofcard"  src="{{=URL('download',args=f[19].image)}}"><p class="backofcard" style="font-family:'Sniglet',serif;">Abhilash Reddy <br><br>pursuing B-tech and MS by research in Computer Science at IIIT-H <br><br> Loves Chatting and Batting</p></div></div>	
+</div></div>
+</body>  <div id="follow">
+        <h2 ><center>follow us on</center></h2>
+<center>
+<a href="http://www.rss.com/"><img src="{{=URL('download',args=f[21].image)}}" width="75" height="75" align="centre">
+</a>
+<a href="https://twitter.com/"><img src="{{=URL('download',args=f[22].image)}}" width="75" height="75" align="centre">
+</a><a href="https://linkedin.com/"><img src="{{=URL('download',args=f[23].image)}}" width="75" height="75" align="centre">
+</a><a href="https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=http://mail.google.com/mail/&scc=1&ltmpl=default&ltmplcache=2&emr=1"><img src="{{=URL('download',args=f[24].image)}}" width="75" height="75" align="centre">
+
+</a><a href="http://www.facebook.com/"><img src="{{=URL('download',args=f[25].image)}}" width="75"height="75" align="centre">
+    </a></center>
+
+        </div>
+<div class="footer" style="text-align:center;">
+<p>© All material on this site is copyright fotolog and its contributors.</p>
+</div></div>

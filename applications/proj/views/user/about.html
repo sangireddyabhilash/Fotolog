@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<link rel="shortcut icon" href="{{=URL('download',args=dbhome.viewpics[10].image)}}">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Trade Winds|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Marck Script|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Sniglet|Inconsolata|Droid+Sans">
+<style>
+#menu{
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+margin-top:0% ;
+padding:0px
+	width: 100%;
+height: 35px;
+	font-size: 16px;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-family: 'Sniglet', serif;
+	font-weight: bold;
+	text-align: center;
+border-radius:15px;
+border:2px solid #a1a1a1;
+	
+}
+#menu ul {
+height: auto;
+padding: 8px 4px;
+margin: 0px;
+}
+#menu li {
+
+display: inline;
+padding: 40px;
+}
+#menu a {
+	text-decoration: none;
+color: black;
+padding: 10px 8px 5px 8px;
+border-radius:15px;
+
+}
+#menu a:hover {
+       background-color:#6E6E6E;
+color:white
+}
+#container{
+	width: 60%;
+margin: auto;
+padding: 5px;
+border: 1px solid #666;
+background: #E5E4E2;
+}
+#p a{
+
+	font-family: 'Sniglet', serif;
+text-decoration: none;
+color:black ;
+
+}
+#p a:hover
+{
+padding:10px ;
+background-color:#6E6E6E ;
+border-radius:25px ;
+color:white ;
+}
+</style>
+<style>
+.page{
+padding right:50px ;
+padding left:50px ;
+width 75% ;
+height 100%;
+}
+.page{
+border-top-left-radius:25px;
+border-top-right-radius:25px;
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+border:2px solid #a1a1a1;
+width:60% ;
+      margin-left:20% ;
+      margin-right:20% ;
+      margin-bottom:0% ;
+}
+#body{
+background:url('{{=URL('download',args=f[12].image)}}') no-repeat center center fixed; 
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover; ;
+	padding 0 ;
+	margin 100% ;
+	width 100% ;
+}
+.pint{
+padding:0.095em ;
+color:black;
+      margin-top:0% ;
+background-color: #fff;
+ background-color: rgba(255,255,255,0.5);
+text-align:center ;
+
+height:50px ;
+border-radius:25px;
+
+border:2px solid #a1a1a1;
+font-family: 'Sniglet', serif;
+font-size:45px ;
+}
+    #pic{
+height:350px;
+width:250px;
+padding:10px 10px 10px 10px ;
+}
+#pic img{
+    height:350px;
+width:250px;
+border:2px solid #a1a1a1;
+border-radius:25px; 
+}
+#about{
+margin-top:-45% ;
+margin-left:35% ;
+  
+height:350px;
+width:63% ;
+    background-color:rgba(255,255,255,0.5) ;
+border:2px solid #a1a1a1;
+border-radius:25px; 
+}
+.footer{
+margin-top:15% ;
+	text-align:center ;
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+color:black;
+	   font-size:10px ;
+height:20px ;
+border-radius:15px;
+}
+    #lash
+{
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+
+border-radius:15px ;
+font-family: 'Sniglet', serif;
+text-align:center;
+
+}
+
+ul.b {list-style-type:square;}
+
+#center
+{
+padding:0px 10px 0px 0px ;
+}
+</style>
+<title>
+fotolog
+</title>
+<head>
+<!--link rel="stylesheet" type="text/css" href="fotolog.css"-->
+</head>
+<div class="page">
+<body id="body">
+</body>
+<div>
+<h1 class="pint">fotolog</h1>
+<p id="p"  style="margin-left:85%;">
+         <a href="{{=URL(c='default',f='user',args='logout')}}"><b>logout</b></a>
+<p id="p" style="margin-left:5%;">
+<a href="{{=URL(f='about',args=session.auth.user.first_name)}}"><b>
+{{=session.auth.user.first_name}}</b></a></p>
+</p>
+<div id="menu">
+<ul>
+<li><a href="{{=URL(f='grid',args=session.auth.user.first_name)}}">Old Journals</a></li>
+<li><a href="{{=URL(f='friends')}}">Friends</a></li>
+<li><a href="{{=URL(f='upload',args=session.auth.user.first_name)}}">Upload</a></li>
+</ul>
+</div>
+<div id="pic">
+<img src="{{=URL('download1',args=session.auth.user.displayimage)}}">
+    {{=request.utcnow}}
+  <!--  {{=session.auth.user.displayimage[23:]}}-->
+</div>
+<div id="about">
+<div id= "lash"><p>Places lived</p></div>
+<ul class="b">
+  <li>{{=session.auth.user.city}}</li>
+    <li>{{=session.auth.user.country}}</li>
+</ul>
+<div id="lash"><p>Occupation</p></div>
+<ul class="b">
+<li>{{=session.auth.user.Occupation}}</li>
+</ul>
+<div id= "lash"><p>Basic Information</p></div>
+<ul class="b">
+    <li>Gender: {{=session.auth.user.gender}}</li>
+  <li>Birthday  :  {{=session.auth.user.birth_date}}</li>
+</ul>
+</div>
+<div class="footer"style=text-align:"center";background:"#32CD32";>
+<p>© All material on this site is copyright fotolog and its contributors.</p>
+</div>
+</div>

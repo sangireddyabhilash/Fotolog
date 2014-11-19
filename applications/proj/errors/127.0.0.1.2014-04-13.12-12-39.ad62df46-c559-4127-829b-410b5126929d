@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'DAL' object has no attribute 'pics'"
+p3
+sS'layer'
+p4
+S'/home/rohithreddy/Desktop/rohith/web2py/applications/proj/controllers/user.py'
+p5
+sS'code'
+p6
+S'# coding: utf8\n# try something like\ndef index():\n    return dict()\n\ndef grid():\n    cont1=dbhome().select(dbhome.pics.ALL)\n    lst={}\n    num={}\n    k=request.args[0]\n    p=0\n    for i in cont1:\n        if i.name==k:\n            lst[p]=i\n            p=p+1\n    num[\'no\']=p\n    return dict(lst=lst,num=num)\n\n\n\ndef download():\n    """\n    allows downloading of uploaded files\n    http://..../[app]/default/download/[filename]\n    """\n    return response.download(request, dbhome)\n\ndef display_form():\n   form = SQLFORM(dbhome.pics,upload=URL(\'download\'))\n   if form.process().accepted:\n       response.flash = \'form accepted\'\n   elif form.errors:\n       response.flash = \'form has errors\'\n   return dict(form=form)\n\n\ndef comments():\n    form1=SQLFORM(dbhome.post)\n    if form1.process().accepted:\n        response.flash = \'form accepted\'\n        db.pics.insert(image=db.post[-1].relimage)\n    else:\n        response.flash=\'rej\'\n    l= int(request.args[0])\n    print \'l-->\',l\n    n=1\n    k=dbhome().select(dbhome.pics.ALL)\n    post=dbhome().select(dbhome.post.ALL)\n    comm={}\n    for i in k:\n        if int(i.id) == l:\n            #print \'i--->\',int(i.id)\n            break\n    for p in post:\n        if int(p.imgid)==l:\n            comm[n]=p\n            n=n+1\n    #sel=dbhome((dbhome.post.imgid)==l and dbhome.post.relimage!=None).select()\n    #for i in sel:\n        #print \'imgid->\',i.imgid,\'l-->\',l\n    sel1=dbhome(dbhome.post.relimage!=None).select()\n    #return dict(k=i,form=form,comm=comm,auth=auth,sel=sel)\n    #print \'i.id--->\',int(i.id)\n    return dict(form1=form1,k=i,comm=comm,sel1=sel1)\n\nresponse._vars=response._caller(comments)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/rohithreddy/Desktop/rohith/web2py/gluon/restricted.py", line 220, in restricted\n    exec ccode in environment\n  File "/home/rohithreddy/Desktop/rohith/web2py/applications/proj/controllers/user.py", line 66, in <module>\n  File "/home/rohithreddy/Desktop/rohith/web2py/gluon/globals.py", line 385, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/rohithreddy/Desktop/rohith/web2py/applications/proj/controllers/user.py", line 41, in comments\n    db.pics.insert(image=db.post[-1].relimage)\n  File "/home/rohithreddy/Desktop/rohith/web2py/gluon/dal.py", line 8329, in __getattr__\n    return ogetattr(self, key)\nAttributeError: \'DAL\' object has no attribute \'pics\'\n'
+p11
+s.

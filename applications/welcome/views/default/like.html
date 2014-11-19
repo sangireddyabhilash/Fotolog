@@ -1,0 +1,27 @@
+function fun(){
+       <!---  var k = document.getElementById("body").value
+         var k1 = document.getElementById("user_name").value
+         document.getElementById("body").value = ""
+         document.getElementById("user_name").value = ""
+         if (k=="" || k1=="")
+         {
+         alert("invalid");
+         return;
+         }---->
+         var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange=function()
+         {
+             if(xmlhttp.readyState==4 && xmlhttp.status==200)
+             {
+                   xmlhttp.responseText = xmlhttp.responseText + 1;
+                   document.getElementById("lik").innerHTML=xmlhttp.responseText;
+             }
+         }
+          xmlhttp.open('GET','http://127.0.0.1:8000/proj/user/comments?start='+'{{=name}}'+'/'+k+'/'+k1,true);
+         xmlhttp.send();
+ }
+<div id = "lik">0
+    </div>
+<button type ="button" id="button" onclick="fun()">
+    </button>
+</button>

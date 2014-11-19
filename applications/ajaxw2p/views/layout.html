@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{=URL('static', 'styles/style.css')}}" />
+    <script src={{=URL('static','scripts/jquery.js')}}></script>
+    <script src={{=URL('static','scripts/web2py.js')}}></script>
+  </head>
+  <body>
+    <div class="page_header">
+      <page-title>{{=response.title}}</page-title>
+    </div>
+    <div class="page_content">{{include}}</div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+timestamp: 2014-03-19T16:45:20.046259
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2014-03-19T16:45:20.143183
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-03-19T16:45:20.218468
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-03-19T16:45:20.322362
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-03-19T16:45:20.401248
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-03-19T16:45:20.505965
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2014-03-19T16:45:20.584809
+CREATE TABLE users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username CHAR(512),
+    password CHAR(512)
+);
+success!
+success!
+timestamp: 2014-03-19T17:33:56.426955
+ALTER TABLE users ADD mobilenumber CHAR(512);
+timestamp: 2014-03-19T17:33:56.519555
+ALTER TABLE users ADD firstname CHAR(512);
+timestamp: 2014-03-19T17:33:56.577887
+ALTER TABLE users ADD lastname CHAR(512);
+success!
+success!
+success!
+success!
+timestamp: 2014-03-19T17:36:20.430301
+CREATE TABLE users1(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Firstname CHAR(512),
+    Lastname CHAR(512),
+    mobilenumber CHAR(512),
+    username CHAR(512) UNIQUE,
+    password CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2014-03-21T23:38:57.462617
+CREATE TABLE images(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Firstname CHAR(512),
+    img CHAR(512)
+);
+success!

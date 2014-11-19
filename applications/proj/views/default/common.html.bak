@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<link rel="shortcut icon" href="./logo.png">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Trade Winds|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Marck Script|Inconsolata|Droid+Sans">
+<style>
+
+#menu{
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+margin-top:0% ;
+padding:0px
+	width: 100%;
+height: 35px;
+	font-size: 16px;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-family: 'Trade Winds', serif;
+	font-weight: bold;
+	text-align: center;
+border-radius:15px;
+border:2px solid #a1a1a1;
+	
+}
+#menu ul {
+height: auto;
+padding: 8px 4px;
+margin: 0px;
+}
+#menu li {
+
+display: inline;
+padding: 40px;
+}
+#menu a {
+	text-decoration: none;
+color: black;
+padding: 10px 8px 5px 8px;
+border-radius:15px;
+
+}
+#menu a:hover {
+       background-color:#6E6E6E;
+color:white
+}
+#container{
+	width: 60%;
+margin: auto;
+padding: 5px;
+border: 1px solid #666;
+background: #E5E4E2;
+}
+#p a{
+
+	font-family: 'Trade Winds', serif;
+text-decoration: none;
+color:black ;
+
+}
+#p a:hover
+{
+padding:10px ;
+background-color:#6E6E6E ;
+border-radius:25px ;
+color:white ;
+}
+</style>
+<style>
+.page{
+padding right:50px ;
+padding left:50px ;
+width 75% ;
+height 100%;
+}
+.page{
+border-top-left-radius:25px;
+border-top-right-radius:25px;
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+border:2px solid #a1a1a1;
+width:60% ;
+      margin-left:20% ;
+      margin-right:20% ;
+      margin-bottom:0% ;
+}
+#body{
+background:url('{{=URL('download',args=f[12].image)}}') no-repeat center center fixed; 
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover; ;                     
+	padding 0 ;
+	margin 100% ;
+	width 100% ;
+}
+.pint{
+padding:0.095em ;
+color:black;
+      margin-top:0% ;
+background-color: #fff;
+ background-color: rgba(255,255,255,0.5);
+text-align:center ;
+
+height:50px ;
+border-radius:25px;
+
+border:2px solid #a1a1a1;
+font-family: 'Tangerine', serif;
+font-size:45px ;
+}
+.footer{
+margin-top:90% ;
+	text-align:center ;
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+color:black;
+	   font-size:10px ;
+height:20px ;
+border-radius:15px;
+}
+</style>
+<title>
+fotolog
+</title>
+<head>
+<!--link rel="stylesheet" type="text/css" href="fotolog.css"-->
+</head>
+<div class="page">
+<body id="body">
+</body>
+<div>
+<h1 class="pint">fotolog</h1>
+<!--<p id="p" style="margin-left:80%;color:white;">
+<a href="fotolog.html"><b>
+</b></a></p>-->
+</div>
+<div id="menu">
+<ul>
+<li><a href="{{=URL(c='user',f='about',args=13)}}">ABHILASH</a></li>
+<li><a href="{{=URL(c='user',f='about',args=14)}}">MANASA</a></li>
+<li><a href="{{=URL(c='user',f='about',args=15)}}">ROHITH</a></li>
+</ul>
+<ul>
+<li style="padding:0px 0px 0px 0px;">{{=IMG(_src=URL('download',args=f[13].image),_alt="",_width=180,_height=300,_border=1)}} </li>
+<li style="padding:0px 0px 0px 0px;">{{=IMG(_src=URL('download',args=f[14].image),_alt="",_width=180,_height=300,_border=1)}} </li>
+<li style="padding:0px 0px 0px 0px;">{{=IMG(_src=URL('download',args=f[15].image),_alt="",_width=180,_height=300,_border=1)}} </li>
+</ul>
+</div>
+<div class="footer"style=text-align:"center";background:"#32CD32";>
+<p>© All material on this site is copyright fotolog and its contributors.</p>
+</div>
+</div>

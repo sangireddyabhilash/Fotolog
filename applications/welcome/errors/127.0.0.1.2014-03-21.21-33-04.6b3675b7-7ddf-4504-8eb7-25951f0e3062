@@ -1,0 +1,385 @@
+(dp1
+S'output'
+p2
+S'missing "pass" in view'
+p3
+sS'layer'
+p4
+S'ParserContainer'
+p5
+sS'code'
+p6
+S'if request.function==\'index\':\n    response.write(\'\\n<h2>\', escape=False)\n    response.write(T("Available Databases and Tables"))\n    response.write(\'</h2>\\n  \', escape=False)\n    if not databases:\n        response.write(T("No databases in this application"))\n        pass\n    response.write(\'\\n<table>\\n  \', escape=False)\n    for db in sorted(databases):\n        response.write(\'\\n    \', escape=False)\n        for table in databases[db].tables:\n            response.write(\'\\n      \', escape=False)\n            qry=\'%s.%s.id>0\'%(db,table)\n            response.write(\'\\n      \', escape=False)\n            tbl=databases[db][table]\n            response.write(\'\\n      \', escape=False)\n            if hasattr(tbl,\'_primarykey\'):\n                response.write(\'\\n        \', escape=False)\n                if tbl._primarykey:\n                    response.write(\'\\n            \', escape=False)\n                    firstkey=tbl[tbl._primarykey[0]]\n                    response.write(\'\\n            \', escape=False)\n                    if firstkey.type in [\'string\',\'text\']:\n                        response.write(\'\\n              \', escape=False)\n                        qry=\'%s.%s.%s!=""\'%(db,table,firstkey.name)\n                        response.write(\'\\n            \', escape=False)\n                    else:\n                        response.write(\'\\n              \', escape=False)\n                        qry=\'%s.%s.%s>0\'%(db,table,firstkey.name)\n                        response.write(\'\\n            \', escape=False)\n                        pass\n                    response.write(\'\\n        \', escape=False)\n                else:\n                    response.write(\'\\n             \', escape=False)\n                    qry=\'\'\n                    response.write(\'\\n        \', escape=False)\n                    pass\n                response.write(\'\\n      \', escape=False)\n                pass\n            response.write(\'\\n  <tr>\\n    <th style="font-size: 1.75em;">\\n      \', escape=False)\n            response.write(A("%s.%s" % (db,table),_href=URL(\'select\',args=[db],vars=dict(query=qry))))\n            response.write(\'\\n    </th>\\n    <td>\\n      \', escape=False)\n            response.write(A(str(T(\'New Record\')),_href=URL(\'insert\',args=[db,table]),_class="btn"))\n            response.write(\'\\n    </td>\\n  </tr>\\n  \', escape=False)\n            pass\n        response.write(\'\\n  \', escape=False)\n        pass\n    response.write(\'\\n</table>\\n\\n\', escape=False)\nelif request.function==\'select\':\n    response.write(\'\\n  <h2>\', escape=False)\n    response.write(XML(str(T("Database %s select"))%A(request.args[0],_href=URL(\'index\'))))\n    response.write(\'\\n  </h2>\\n  \', escape=False)\n    if tb:\n        response.write(\'\\n  <h3>\', escape=False)\n        response.write(T(\'Traceback\'))\n        response.write(\'</h3>\\n  <pre>\\n    \', escape=False)\n        response.write(tb)\n        response.write(\'\\n  </pre>\\n  \', escape=False)\n        pass\n    response.write(\'\\n  \', escape=False)\n    if table:\n        response.write(\'\\n  \', escape=False)\n        response.write(A(str(T(\'New Record\')),_href=URL(\'insert\',args=[request.args[0],table]),_class="btn"))\n        response.write(\'<br/><br/>\\n    <h3>\', escape=False)\n        response.write(T("Rows in Table"))\n        response.write(\'</h3><br/>\\n   \', escape=False)\n    else:\n        response.write(\'\\n    <h3>\', escape=False)\n        response.write(T("Rows selected"))\n        response.write(\'</h3><br/>\\n   \', escape=False)\n        pass\n    response.write(\'\\n   \', escape=False)\n    response.write(form)\n    response.write(\'\\n   <p>\', escape=False)\n    response.write(T(\'The "query" is a condition like "db.table1.field1==\\\'value\\\'". Something like "db.table1.field1==db.table2.field2" results in a SQL JOIN.\'))\n    response.write(\'<br/>\\n      \', escape=False)\n    response.write(T(\'Use (...)&(...) for AND, (...)|(...) for OR, and ~(...)  for NOT to build more complex queries.\'))\n    response.write(\'<br/>\\n      \', escape=False)\n    response.write(T(\'"update" is an optional expression like "field1=\\\'newvalue\\\'". You cannot update or delete the results of a JOIN\'))\n    response.write(\'</p>\\n    <br/><br/>\\n    <h4>\', escape=False)\n    response.write(T("%s selected", nrows))\n    response.write(\'</h4>\\n    \', escape=False)\n    if start>0:\n        response.write(A(T(\'previous %s rows\') % step,_href=URL(\'select\',args=request.args[0],vars=dict(start=start-step)),_class="btn"))\n        pass\n    response.write(\'\\n    \', escape=False)\n    if stop<nrows:\n        response.write(A(T(\'next %s rows\') % step,_href=URL(\'select\',args=request.args[0],vars=dict(start=start+step)),_class="btn"))\n        pass\n    response.write(\'\\n    \', escape=False)\n    if rows:\n        response.write(\'\\n       <div style="overflow: auto;" width="80%">\\n       \', escape=False)\n        linkto = lambda f, t, r: URL(\'update\', args=[request.args[0], r, f]) if f else "#"\n        response.write(\'\\n       \', escape=False)\n        upload=URL(\'download\',args=request.args[0])\n        response.write(\'\\n       \', escape=False)\n        response.write(SQLTABLE(rows,linkto,upload,orderby=True,_class=\'sortable\'))\n        response.write(\'\\n       </div>\\n    \', escape=False)\n        pass\n    response.write(\'\\n    <br/><br/><h3>\', escape=False)\n    response.write(T("Import/Export"))\n    response.write(\'</h3><br/>\\n    <a href="\', escape=False)\n    response.write(URL(\'csv\',args=request.args[0],vars=dict(query=query)))\n    response.write(\'" class="btn">\', escape=False)\n    response.write(T("export as csv file"))\n    response.write(\'</a>\\n  \', escape=False)\n    response.write(formcsv or \'\')\n    response.write(\'\\n\\n\', escape=False)\nelif request.function==\'insert\':\n    response.write(\'\\n  <h2>\', escape=False)\n    response.write(T("Database"))\n    response.write(\' \', escape=False)\n    response.write(A(request.args[0],_href=URL(\'index\')))\n    response.write(\'\\n    \', escape=False)\n    if hasattr(table,\'_primarykey\'):\n        response.write(\'\\n      \', escape=False)\n        fieldname=table._primarykey[0]\n        response.write(\'\\n      \', escape=False)\n        dbname=request.args[0]\n        response.write(\'\\n      \', escape=False)\n        tablename=request.args[1]\n        response.write(\'\\n      \', escape=False)\n        cond = table[fieldname].type in [\'string\',\'text\'] and \'!=""\' or \'>0\'\n        response.write(\'\\n      \', escape=False)\n        response.write(T("Table"))\n        response.write(\' \', escape=False)\n        response.write(A(tablename,_href=URL(\'select\',args=dbname,vars=dict(query=\'%s.%s.%s%s\'%(dbname,tablename,fieldname,cond)))))\n        response.write(\'\\n    \', escape=False)\n    else:\n        response.write(\'\\n      \', escape=False)\n        response.write(T("Table"))\n        response.write(\' \', escape=False)\n        response.write(A(request.args[1],_href=URL(\'select\',args=request.args[0],vars=dict(query=\'%s.%s.id>0\'%tuple(request.args[:2])))))\n        response.write(\'\\n    \', escape=False)\n        pass\n    response.write(\'\\n  </h2>\\n  <h3>\', escape=False)\n    response.write(T("New Record"))\n    response.write(\'</h3><br/>\\n  \', escape=False)\n    response.write(form)\n    response.write(\'\\n\', escape=False)\nelif request.function==\'update\':\n    response.write(\'\\n  <h2>\', escape=False)\n    response.write(T("Database"))\n    response.write(\' \', escape=False)\n    response.write(A(request.args[0],_href=URL(\'index\')))\n    response.write(\'\\n    \', escape=False)\n    if hasattr(table,\'_primarykey\'):\n        response.write(\'\\n      \', escape=False)\n        fieldname=request.vars.keys()[0]\n        response.write(\'\\n      \', escape=False)\n        dbname=request.args[0]\n        response.write(\'\\n      \', escape=False)\n        tablename=request.args[1]\n        response.write(\'\\n      \', escape=False)\n        cond = table[fieldname].type in [\'string\',\'text\'] and \'!=""\' or \'>0\'\n        response.write(\'\\n      \', escape=False)\n        response.write(T("Table"))\n        response.write(\' \', escape=False)\n        response.write(A(tablename,_href=URL(\'select\',args=dbname,vars=dict(query=\'%s.%s.%s%s\'%(dbname,tablename,fieldname,cond)))))\n        response.write(\'\\n      \', escape=False)\n        response.write(T("Record"))\n        response.write(\' \', escape=False)\n        response.write(A(\'%s=%s\'%request.vars.items()[0],_href=URL(\'update\',args=request.args[:2],vars=request.vars)))\n        response.write(\'\\n    \', escape=False)\n    else:\n        response.write(\'\\n      \', escape=False)\n        response.write(T("Table"))\n        response.write(\' \', escape=False)\n        response.write(A(request.args[1],_href=URL(\'select\',args=request.args[0],vars=dict(query=\'%s.%s.id>0\'%tuple(request.args[:2])))))\n        response.write(\'\\n      \', escape=False)\n        response.write(T("Record id"))\n        response.write(\' \', escape=False)\n        response.write(A(request.args[2],_href=URL(\'update\',args=request.args[:3])))\n        response.write(\'\\n    \', escape=False)\n        pass\n    response.write(\'\\n  </h2>\\n  <h3>\', escape=False)\n    response.write(T("Edit current record"))\n    response.write(\'</h3><br/><br/>\', escape=False)\n    response.write(form)\n    response.write(\'\\n\\n\', escape=False)\nelif request.function==\'state\':\n    response.write(\'\\n  <h2>\', escape=False)\n    response.write(T("Internal State"))\n    response.write(\'</h2>\\n  <h3>\', escape=False)\n    response.write(T("Current request"))\n    response.write(\'</h3>\\n  \', escape=False)\n    response.write(BEAUTIFY(request))\n    response.write(\'\\n  <br/><h3>\', escape=False)\n    response.write(T("Current response"))\n    response.write(\'</h3>\\n  \', escape=False)\n    response.write(BEAUTIFY(response))\n    response.write(\'\\n  <br/><h3>\', escape=False)\n    response.write(T("Current session"))\n    response.write(\'</h3>\\n  \', escape=False)\n    response.write(BEAUTIFY(session))\n    response.write(\'\\n\\n\\n\', escape=False)\nelif request.function == \'ccache\':\n    response.write(\'\\n<h2>\', escape=False)\n    T("Cache")\n    response.write(\'</h2>\\n<div class="list">\\n\\n  <div class="list-header">\\n    <h3>\', escape=False)\n    T("Statistics")\n    response.write(\'</h3>\\n  </div>\\n\\n  <div class="content">\\n    <h4>\', escape=False)\n    response.write(T("Overview"))\n    response.write(\'</h4>\\n    <p>\', escape=False)\n    response.write(T.M("Number of entries: **%s**", total[\'entries\']))\n    response.write(\'</p>\\n    \', escape=False)\n    if total[\'entries\'] > 0:\n        response.write(\'\\n      <p>\', escape=False)\n        response.write(T.M("Hit Ratio: **%(ratio)s%%** (**%(hits)s** %%{hit(hits)} and **%(misses)s** %%{miss(misses})",\n        dict(ratio=total[\'ratio\'], hits=total[\'hits\'], misses=total[\'misses\'])))\n        response.write(\'\\n     </p>\\n    <p>\\n      \', escape=False)\n        response.write(T("Size of cache:"))\n        response.write(\'\\n      \', escape=False)\n        if object_stats:\n            response.write(\'\\n        \', escape=False)\n            response.write(T.M("**%(items)s** %%{item(items)}, **%(bytes)s** %%{byte(bytes)}", dict(items=total[\'objects\'], bytes=total[\'bytes\'])))\n            response.write(\'\\n        \', escape=False)\n            if total[\'bytes\'] > 524287:\n                response.write(\'\\n          \', escape=False)\n                response.write(T.M("(**%.0d MB**)", total[\'bytes\'] / 1048576))\n                response.write(\'\\n        \', escape=False)\n                pass\n            response.write(\'\\n      \', escape=False)\n        else:\n            response.write(\'\\n        \', escape=False)\n            response.write(T.M("**not available** (requires the Python [[guppy http://pypi.python.org/pypi/guppy/ popup]] library)"))\n            response.write(\'\\n      \', escape=False)\n            pass\n        response.write(\'\\n    </p>\\n    <p>\\n      \', escape=False)\n        response.write(T.M("Cache contains items up to **%(hours)02d** %%{hour(hours)} **%(min)02d** %%{minute(min)} **%(sec)02d** %%{second(sec)} old.",\n        dict(hours=total[\'oldest\'][0], min=total[\'oldest\'][1], sec=total[\'oldest\'][2])))\n        response.write(\'\\n    </p>\\n    \', escape=False)\n        response.write(BUTTON(T(\'Cache Keys\'), _onclick=\'jQuery("#all_keys").toggle();\'))\n        response.write(\'\\n    <div class="hidden" id="all_keys">\\n      \', escape=False)\n        response.write(total[\'keys\'])\n        response.write(\'\\n    </div>\\n    <br />\\n    \', escape=False)\n        pass\n    response.write(\'\\n\', escape=False)'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__module__'
+p12
+S"'gluon.rocket'"
+p13
+sS'__getslice__'
+p14
+S"<method-wrapper '__getslice__' of SocketTimeout object>"
+p15
+sS'__str__'
+p16
+S"<method-wrapper '__str__' of SocketTimeout object>"
+p17
+sS'__reduce__'
+p18
+S'<built-in method __reduce__ of SocketTimeout object>'
+p19
+sS'__dict__'
+p20
+S'{}'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of SocketTimeout object>'
+p23
+sS'__weakref__'
+p24
+S'None'
+p25
+sS'__init__'
+p26
+S"<method-wrapper '__init__' of SocketTimeout object>"
+p27
+sS'__setattr__'
+p28
+S"<method-wrapper '__setattr__' of SocketTimeout object>"
+p29
+sS'__reduce_ex__'
+p30
+S'<built-in method __reduce_ex__ of SocketTimeout object>'
+p31
+sS'__new__'
+p32
+S'<built-in method __new__ of type object>'
+p33
+sS'__format__'
+p34
+S'<built-in method __format__ of SocketTimeout object>'
+p35
+sS'__class__'
+p36
+S"<class 'gluon.rocket.SocketTimeout'>"
+p37
+sS'__doc__'
+p38
+S"'Exception for when a socket times out between requests.'"
+p39
+sS'__getitem__'
+p40
+S"<method-wrapper '__getitem__' of SocketTimeout object>"
+p41
+sS'__setstate__'
+p42
+S'<built-in method __setstate__ of SocketTimeout object>'
+p43
+sS'__getattribute__'
+p44
+S"<method-wrapper '__getattribute__' of SocketTimeout object>"
+p45
+sS'args'
+p46
+S"('Socket timed out before request.',)"
+p47
+sS'__subclasshook__'
+p48
+S'<built-in method __subclasshook__ of type object>'
+p49
+sS'__unicode__'
+p50
+S'<built-in method __unicode__ of SocketTimeout object>'
+p51
+sS'__delattr__'
+p52
+S"<method-wrapper '__delattr__' of SocketTimeout object>"
+p53
+sS'__repr__'
+p54
+S"<method-wrapper '__repr__' of SocketTimeout object>"
+p55
+sS'__hash__'
+p56
+S"<method-wrapper '__hash__' of SocketTimeout object>"
+p57
+ssS'evalue'
+p58
+S'Socket timed out before request.'
+p59
+sS'frames'
+p60
+(lp61
+(dp62
+S'file'
+p63
+S'/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py'
+p64
+sS'dump'
+p65
+(dp66
+S'self'
+p67
+S'<WSGIWorker(Thread-8, started daemon -1286624400)>'
+p68
+sS'conn'
+p69
+S'<gluon.rocket.Connection object>'
+p70
+sS'self.run_app'
+p71
+S'<bound method WSGIWorker.run_app of <WSGIWorker(Thread-8, started daemon -1286624400)>>'
+p72
+ssS'lnum'
+p73
+I1337
+sS'lines'
+p74
+(dp75
+I1332
+S'            # Enter connection serve loop'
+p76
+sI1333
+S'            while True:'
+p77
+sI1334
+S'                if __debug__:'
+p78
+sI1335
+S"                    self.err_log.debug('Serving a request')"
+p79
+sI1336
+S'                try:'
+p80
+sI1337
+S'                    self.run_app(conn)'
+p81
+sI1338
+S'                except:'
+p82
+sI1339
+S'                    exc = sys.exc_info()'
+p83
+sI1340
+S'                    handled = self._handleError(*exc)'
+p84
+sI1341
+S'                    if handled:'
+p85
+ssS'call'
+p86
+S'(self=<WSGIWorker(Thread-8, started daemon -1286624400)>)'
+p87
+sS'func'
+p88
+S'run'
+p89
+sa(dp90
+g63
+S'/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py'
+p91
+sg65
+(dp92
+S'self'
+p93
+S'<WSGIWorker(Thread-8, started daemon -1286624400)>'
+p94
+sS'self.environ'
+p95
+S"{'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate', 'HTTP_ACCEPT_LANGUAGE': 'en-US,en;q=0.5', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_COOKIE': 'session_id_welcome=127.0.0.1-c0b6fe81-9150-495c-...oj=127.0.0.1-146bebca-68a8-46a6-8c28-be11f4e431a2', 'HTTP_HOST': '127.0.0.1:8000', 'HTTP_USER_AGENT': 'Mozilla/5.0 (X11; Linux i686; rv:28.0) Gecko/20100101 Firefox/28.0', 'PATH_INFO': '/welcome/appadmin/index', 'QUERY_STRING': '', 'REMOTE_ADDR': '127.0.0.1', ...}"
+p96
+sS'sock_file'
+p97
+S'<socket._fileobject object>'
+p98
+sS'environ'
+p99
+S'undefined'
+p100
+sS'self.build_environ'
+p101
+S'<bound method WSGIWorker.build_environ of <WSGIWorker(Thread-8, started daemon -1286624400)>>'
+p102
+sS'conn'
+p103
+S'<gluon.rocket.Connection object>'
+p104
+ssg73
+I1830
+sg74
+(dp105
+I1825
+S'        else:'
+p106
+sI1826
+S'            sock_file = conn.makefile(BUF_SIZE)'
+p107
+sI1827
+S''
+sI1828
+S'        try:'
+p108
+sI1829
+S'            # Read the headers and build our WSGI environment'
+p109
+sI1830
+S'            self.environ = environ = self.build_environ(sock_file, conn)'
+p110
+sI1831
+S''
+sI1832
+S'            # Handle 100 Continue'
+p111
+sI1833
+S"            if environ.get('HTTP_EXPECT', '') == '100-continue':"
+p112
+sI1834
+S"                res = environ['SERVER_PROTOCOL'] + ' 100 Continue\\r\\n\\r\\n'"
+p113
+ssg86
+S'(self=<WSGIWorker(Thread-8, started daemon -1286624400)>, conn=<gluon.rocket.Connection object>)'
+p114
+sg88
+S'run_app'
+p115
+sa(dp116
+g63
+S'/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py'
+p117
+sg65
+(dp118
+S'sock_file'
+p119
+S'<socket._fileobject object>'
+p120
+sS'self.read_request_line'
+p121
+S'<bound method WSGIWorker.read_request_line of <WSGIWorker(Thread-8, started daemon -1286624400)>>'
+p122
+sS'self'
+p123
+S'<WSGIWorker(Thread-8, started daemon -1286624400)>'
+p124
+sS'request'
+p125
+g100
+ssg73
+I1650
+sg74
+(dp126
+I1645
+S'                                      "wsgiorg.futures": executor.futures})'
+p127
+sI1646
+S''
+sI1647
+S'    def build_environ(self, sock_file, conn):'
+p128
+sI1648
+S'        """ Build the execution environment. """'
+p129
+sI1649
+S'        # Grab the request line'
+p130
+sI1650
+S'        request = self.read_request_line(sock_file)'
+p131
+sI1651
+S''
+sI1652
+S'        # Copy the Base Environment'
+p132
+sI1653
+S'        environ = self.base_environ.copy()'
+p133
+sI1654
+S''
+ssg86
+S'(self=<WSGIWorker(Thread-8, started daemon -1286624400)>, sock_file=<socket._fileobject object>, conn=<gluon.rocket.Connection object>)'
+p134
+sg88
+S'build_environ'
+p135
+sa(dp136
+g63
+S'/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py'
+p137
+sg65
+(dp138
+S'global SocketTimeout'
+p139
+S"<class 'gluon.rocket.SocketTimeout'>"
+p140
+ssg73
+I1401
+sg74
+(dp141
+I1396
+S''
+sI1397
+S'                d = sock_file.readline()'
+p142
+sI1398
+S'                if PY3K:'
+p143
+sI1399
+S"                    d = d.decode('ISO-8859-1')"
+p144
+sI1400
+S'        except socket.timeout:'
+p145
+sI1401
+S"            raise SocketTimeout('Socket timed out before request.')"
+p146
+sI1402
+S'        except TypeError:'
+p147
+sI1403
+S'            raise SocketClosed('
+p148
+sI1404
+S"                'SSL bug caused closure of socket.  See '"
+p149
+sI1405
+S'                \'"https://groups.google.com/d/topic/web2py/P_Gw0JxWzCs".\')'
+p150
+ssg86
+S'(self=<WSGIWorker(Thread-8, started daemon -1286624400)>, sock_file=<socket._fileobject object>)'
+p151
+sg88
+S'read_request_line'
+p152
+sasS'pyver'
+p153
+S'Python 2.7: /usr/bin/python (prefix: /usr)'
+p154
+sS'etype'
+p155
+S"<class 'gluon.rocket.SocketTimeout'>"
+p156
+sS'date'
+p157
+S'Fri Mar 21 21:33:05 2014'
+p158
+sS'locals'
+p159
+(dp160
+S'sock_file'
+p161
+S'<socket._fileobject object>'
+p162
+sS'self'
+p163
+S'<WSGIWorker(Thread-8, started daemon -1286624400)>'
+p164
+sssS'traceback'
+p165
+S'Traceback (most recent call last):\n  File "/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py", line 1337, in run\n    self.run_app(conn)\n  File "/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py", line 1830, in run_app\n    self.environ = environ = self.build_environ(sock_file, conn)\n  File "/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py", line 1650, in build_environ\n    request = self.read_request_line(sock_file)\n  File "/ug/ug2k13/csd/rohith.reddy/web2py/gluon/rocket.py", line 1401, in read_request_line\n    raise SocketTimeout(\'Socket timed out before request.\')\nSocketTimeout: Socket timed out before request.\n'
+p166
+s.

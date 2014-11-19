@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<link rel="shortcut icon" href="./logo.png">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Trade Winds|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Marck Script|Inconsolata|Droid+Sans">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Sniglet|Inconsolata|Droid+Sans">
+
+<style>
+
+#menu{
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+margin-top:0% ;
+padding:0px
+	width: 100%;
+height: 35px;
+	font-size: 16px;
+	font-family: 'Sniglet', serif;
+	font-weight: bold;
+	text-align: center;
+border-radius:15px;
+border:2px solid #a1a1a1;
+	
+}
+#menu ul {
+height: auto;
+padding: 8px 4px;
+margin: 0px;
+}
+#menu li {
+
+display: inline;
+padding: 40px;
+}
+#menu a {
+	text-decoration: none;
+color: black;
+padding: 10px 8px 5px 8px;
+border-radius:15px;
+
+}
+#menu a:hover {
+       background-color:#6E6E6E;
+color:white
+}
+#container{
+	width: 60%;
+margin: auto;
+padding: 5px;
+border: 1px solid #666;
+background: #E5E4E2;
+}
+#p a{
+
+	font-family: 'Sniglet', serif;
+text-decoration: none;
+color:black ;
+
+}
+#p a:hover
+{
+padding:10px ;
+background-color:#6E6E6E ;
+border-radius:25px ;
+color:white ;
+}
+</style>
+<style>
+.page{
+padding right:50px ;
+padding left:50px ;
+width 75% ;
+height 100%;
+}
+.page{
+border-top-left-radius:25px;
+border-top-right-radius:25px;
+
+-color: #fff;
+background-color: rgba(255,255,255,0.5);
+border:2px solid #a1a1a1;
+width:60% ;
+      margin-left:20% ;
+      margin-right:20% ;
+      margin-bottom:0% ;
+}
+#body{
+background:url('{{=URL('download',args=f[12].image)}}') no-repeat center center fixed; 
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover; ;                     
+	padding 0 ;
+	margin 100% ;
+	width 100% ;
+}
+.pint{
+padding:0.095em ;
+color:black;
+      margin-top:0% ;
+background-color: #fff;
+ background-color: rgba(255,255,255,0.5);
+text-align:center ;
+
+height:50px ;
+border-radius:25px;
+
+border:2px solid #a1a1a1;
+font-family: 'Sniglet', serif;
+font-size:45px ;
+}
+#form{
+    background-color:rgba(255,255,255,0.5);
+    border-radius:15px ;
+    border:2px solid #a1a1a1;
+    width:40% ;
+    margin-top:5% ;
+    margin-left:30% ;
+    margin-right:50% ;
+}
+.footer{
+margin-top:15% ;
+	text-align:center ;
+background-color: #fff;
+background-color: rgba(255,255,255,0.5);
+color:black;
+	   font-size:10px ;
+height:20px ;
+border-radius:15px;
+}
+</style>
+<title>
+fotolog
+</title>
+<head>
+<!--link rel="stylesheet" type="text/css" href="fotolog.css"-->
+</head>
+<div class="page">
+<body id="body">
+</body>
+<div>
+<h1 class="pint">fotolog</h1>
+    <p id="p"  style="margin-left:85%;">
+         <a href="{{=URL(c='default',f='user',args='logout')}}"><b>logout</b></a>
+<p id="p" style="margin-left:5%;">
+<a href="{{=URL(f='about',args=session.auth.user.first_name)}}"><b>
+{{=session.auth.user.first_name}}</b></a></p>
+</p>
+</div>
+<div id="menu">
+<ul>
+<li><a href="{{=URL(f='grid',args=session.auth.user.first_name)}}">Old Journals</a></li>
+<li><a href="{{=URL(f='friends')}}">Friends</a></li>
+<li><a href="{{=URL(f='upload',args=session.auth.user.first_name)}}">Upload</a></li>
+</ul>
+</div>
+    <div style="margin-left:30%;">
+        <h2 style="font-family:'Sniglet',serif;">
+            Upload
+    </h2><p style="font-family:'Sniglet',serif;" >
+    Build up your memories!!<br>
+    upload an image...
+    </p></div>
+    <div id="form">
+    {{=form}}
+        </div>
+ <!--a href="{{=URL(c='default',f='user',args='logout')}}">logout</a-->
+<div class="footer"style=text-align:"center";background:"#32CD32";>
+<p>© All material on this site is copyright fotolog and its contributors.</p>
+</div>
+</div>

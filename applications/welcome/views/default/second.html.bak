@@ -1,0 +1,5 @@
+{{extend 'layout.html'}}
+<h1>This is the default/second.html template</h1>
+{{extend 'layout.html'}}
+<h1>Hello {{=request.vars.visitor_name}}</h1>
+{{=BEAUTIFY(response._vars)}}

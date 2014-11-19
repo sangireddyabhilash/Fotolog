@@ -1,0 +1,14 @@
+<h3>Testing js.....</h3>
+<script type="text/javascript">
+    function func()
+    {
+        var x='{{=dt}}'
+        var y=x
+        x=JSON.parse(x.replace(/&quot;/g,'"'));
+       console.log (x['name'],x['rollno'],x['colg']);
+        console.log(y)
+        document.getElementById('yo').innerHTML=x['name']+" "+x['rollno']+' '+x['colg']
+    }
+</script>
+<button type="button" onclick="func()" >click</button>
+<p id='yo'>seee</p>

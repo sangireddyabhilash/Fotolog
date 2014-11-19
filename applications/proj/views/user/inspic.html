@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+<h1>This is the user/inspic.html template</h1>
+{{elif request.function=='insert':}}
+  <h2>
+    {{if hasattr(table,'_primarykey'):}}
+      {{fieldname=table._primarykey[0]}}
+      {{dbname=request.args[0]}}
+      {{tablename=request.args[1]}}
+      {{cond = table[fieldname].type in ['string','text'] and '!=""' or '>0'}}
+      {{=T("Table")}} {{=A(tablename,_href=URL('select',args=dbname,vars=dict(query='%s.%s.%s%s'%(dbname,tablename,fieldname,cond))))}}
+   
+      {{pass}}
+ </h2>
+  <h3>{{=T("Upload Your Photo")}}</h3><br/>
+  {{=form}}
